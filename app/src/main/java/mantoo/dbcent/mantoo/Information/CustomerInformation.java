@@ -6,10 +6,31 @@ package mantoo.dbcent.mantoo.Information;
 
 public class CustomerInformation {
 
+
+
+    private String customerId;
+    private String customerMantooId;
    private String customerName;
    private String customerAddress;
    private String customerContact;
    private double customerBalance;
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getCustomerMantooId() {
+        return customerMantooId;
+    }
+
+    public void setCustomerMantooId(String customerMantooId) {
+        this.customerMantooId = customerMantooId;
+    }
+
 
     public String getCustomerName() {
         return customerName;

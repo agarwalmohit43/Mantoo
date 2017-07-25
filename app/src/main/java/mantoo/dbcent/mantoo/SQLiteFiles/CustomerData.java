@@ -18,7 +18,7 @@ import mantoo.dbcent.mantoo.Information.CustomerInformation;
  * Created by dbcent91 on 21/7/17.
  */
 
-public class CustomerData {
+public class CustomerData implements CustomerGet,CustomerSet{
 
     private SQLiteDatabase sqLiteDatabaseObj;
     private SchemaDefinition schemaDefinitionObj;
@@ -66,79 +66,20 @@ public class CustomerData {
 
     }
 
-    /*public long insertPartydata(ContentValues contentValues) {
-
-        long id = sqLiteDatabaseObj.insert("parties", null, contentValues);
-        return id;
-    }*/
-
-    public ArrayList<String> getPartyName() {
-        ArrayList<String> alPartyName = new ArrayList<String>();
-
-        String[] columns = {"name"};
-        Cursor cursor = sqLiteDatabaseObj.query("parties", columns, null, null, null, null, null);
-
-        while (cursor.moveToNext()) {
-            String name = cursor.getString(0);
-            alPartyName.add(name);
-        }
-
-        return alPartyName;
-    }
-
-    public ArrayList<String> getPartyAddress() {
-        ArrayList<String> alPartyAddress = new ArrayList<String>();
-
-        String[] columns = {"address"};
-        Cursor cursor = sqLiteDatabaseObj.query("parties", columns, null, null, null, null, null);
-
-        while (cursor.moveToNext()) {
-            String address = cursor.getString(0);
-            alPartyAddress.add(address);
-        }
-
-        return alPartyAddress;
-    }
-
-    public ArrayList<Integer> getPartyBalance() {
-        ArrayList<Integer> alPartyBalance = new ArrayList<>();
-
-        String[] columns = {"dueAmount"};
-        Cursor cursor = sqLiteDatabaseObj.query("parties", columns, null, null, null, null, null);
-
-        while (cursor.moveToNext()) {
-            int balance = cursor.getInt(0);
-            alPartyBalance.add(balance);
-        }
-
-        return alPartyBalance;
-    }
-
-    public ArrayList<String> getPartyContact() {
-        ArrayList<String> alPartyContact = new ArrayList<>();
-
-        String[] columns = {"phoneNumber"};
-        Cursor cursor = sqLiteDatabaseObj.query("parties", columns, null, null, null, null, null);
-
-        while (cursor.moveToNext()) {
-            String contact=cursor.getString(0);
-            alPartyContact.add(contact);
-        }
-
-        return alPartyContact;
-    }
     public ArrayList<CustomerInformation> getPartyList() {
         ArrayList<CustomerInformation> customerInformation = new ArrayList<>();
 
-        String[] columns = {"name","address","dueAmount","phoneNumber"};
+        String[] columns = {"id","mantooId","name","address","dueAmount","phoneNumber"};
         Cursor cursor = sqLiteDatabaseObj.query("parties", columns, null, null, null, null, null);
 
         while (cursor.moveToNext()) {
             CustomerInformation obj=new CustomerInformation();
-            obj.setCustomerAddress(cursor.getString(1));
-            obj.setCustomerBalance(cursor.getDouble(2));
-            obj.setCustomerContact(cursor.getString(3));
-            obj.setCustomerName(cursor.getString(0));
+            obj.setCustomerId(cursor.getString(0));
+            obj.setCustomerMantooId(cursor.getString(1));
+            obj.setCustomerName(cursor.getString(2));
+            obj.setCustomerAddress(cursor.getString(3));
+            obj.setCustomerBalance(cursor.getDouble(4));
+            obj.setCustomerContact(cursor.getString(5));
 
             customerInformation.add(obj);
         }
