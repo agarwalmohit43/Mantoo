@@ -66,6 +66,7 @@ public class CustomerData implements CustomerGet,CustomerSet{
 
     }
 
+    //get All columns equivalent to columns string
     public ArrayList<CustomerInformation> getPartyList() {
         ArrayList<CustomerInformation> customerInformation = new ArrayList<>();
 
