@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         init(savedInstanceState);
 
+        //Database object
         customerDataObj=new CustomerData(this);
 
 
