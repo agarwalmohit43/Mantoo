@@ -5,20 +5,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 import mantoo.dbcent.mantoo.Extra.Message;
 import mantoo.dbcent.mantoo.Information.CustomerInformation;
+import mantoo.dbcent.mantoo.Interface.Customer;
 
 /**
  * Created by dbcent91 on 21/7/17.
  */
 
-public class CustomerData implements CustomerGet,CustomerSet{
+public class CustomerData implements Customer {
 
     private SQLiteDatabase sqLiteDatabaseObj;
     private SchemaDefinition schemaDefinitionObj;
@@ -53,7 +52,7 @@ public class CustomerData implements CustomerGet,CustomerSet{
                 contentValues.put("createdAt", millisecond);
                 contentValues.put("updatedAt", millisecond);
 
-                Log.d("Mohit", name + i);
+                Log.d("Customer", name + i);
                 sqLiteDatabaseObj.insert("parties", null, contentValues);
             }
             sqLiteDatabaseObj.setTransactionSuccessful();
@@ -66,7 +65,6 @@ public class CustomerData implements CustomerGet,CustomerSet{
 
     }
 
-    //get All columns equivalent to columns string
     public ArrayList<CustomerInformation> getPartyList() {
         ArrayList<CustomerInformation> customerInformation = new ArrayList<>();
 
@@ -82,9 +80,31 @@ public class CustomerData implements CustomerGet,CustomerSet{
             obj.setCustomerBalance(cursor.getDouble(4));
             obj.setCustomerContact(cursor.getString(5));
 
+            Log.d("Customer",cursor.getString(0));
             customerInformation.add(obj);
         }
         return customerInformation;
+    }
+
+    public void updateParty(ContentValues contentValues, String partyId) {
+
+        sqLiteDatabaseObj.beginTransaction();
+        try
+        {
+
+            sqLiteDatabaseObj.update("parties",contentValues, "id='" + partyId+"'", null);
+            sqLiteDatabaseObj.setTransactionSuccessful();
+            Message.message(context, "Update Successfull");
+
+        }catch (Exception e)
+        {
+            Log.d("Customer",""+e);
+            Message.message(context, "Unabel to update");
+
+        }finally
+        {
+            sqLiteDatabaseObj.endTransaction();
+        }
     }
 
 }

@@ -1,5 +1,7 @@
 package mantoo.dbcent.mantoo.Activites;
 
+import android.app.FragmentManager;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
@@ -15,6 +17,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +32,7 @@ import mantoo.dbcent.mantoo.Fragments.Customer;
 import mantoo.dbcent.mantoo.Fragments.Payments;
 import mantoo.dbcent.mantoo.Fragments.Product;
 import mantoo.dbcent.mantoo.Fragments.Sells;
+import mantoo.dbcent.mantoo.Fragments.UpdateCustomer;
 import mantoo.dbcent.mantoo.R;
 import mantoo.dbcent.mantoo.SQLiteFiles.CustomerData;
 import mantoo.dbcent.mantoo.SQLiteFiles.SchemaDefinition;
@@ -73,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setUpNavigationDrawerMenu();
         byDefaultLoading();
        // createSchema();
+
+
 
     }
 
@@ -221,10 +227,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
+        /*if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
             closeDrawer();
         else
+            super.onBackPressed();*/
+
+        FragmentManager fm = getFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            Log.i("MainActivity", "popping backstack");
+            fm.popBackStack();
+        } else {
+            Log.i("MainActivity", "nothing on backstack, calling super");
             super.onBackPressed();
+        }
+
     }
 
     @Override
@@ -244,6 +260,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }else if (id == R.id.check_update){
+            ContentValues contentValues=new ContentValues();
+            contentValues.put("name","Mohit");
+            customerDataObj.updateParty(contentValues,"c9bc4c11-9196-496c-bfd6-90bfdd7ff675");
         }
 
         return super.onOptionsItemSelected(item);

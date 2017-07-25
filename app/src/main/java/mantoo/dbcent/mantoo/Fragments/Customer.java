@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -40,6 +41,8 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
     Toolbar toolbar;
 
     CustomerAdapter madapter;
+
+
 
 
     @Override
@@ -81,8 +84,28 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
 
             @Override
             public void onClick(View view, int position) {
+
                 CustomerInformation customerInformation = customerDataObj.getPartyList().get(position);
-                Toast.makeText(getActivity(), customerInformation.getCustomerName() + " is selected!", Toast.LENGTH_SHORT).show();
+
+
+//                Toast.makeText(getActivity(), customerInformation.getCustomerName() + " is selected!", Toast.LENGTH_SHORT).show();
+
+
+
+                Bundle sendinfo = new Bundle();
+                sendinfo.putString("customerId",customerInformation.getCustomerId());
+                sendinfo.putString("customerName",customerInformation.getCustomerName());
+                sendinfo.putString("customerContact",customerInformation.getCustomerContact());
+                sendinfo.putString("customerAddress",customerInformation.getCustomerAddress());
+                sendinfo.putString("customerBalance",customerInformation.getCustomerBalance());
+
+                Fragment mfragment = new UpdateCustomer();
+                mfragment.setArguments(sendinfo);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_main, mfragment).commit();
+
+
+
+
             }
 
             @Override
