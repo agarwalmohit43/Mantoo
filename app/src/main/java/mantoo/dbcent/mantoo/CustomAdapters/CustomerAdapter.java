@@ -73,6 +73,11 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
         return customerInformationsData.size();
     }
 
+    public void remove(int position) {
+        customerInformationsData.remove(position);
+        notifyItemRemoved(position);
+    }
+
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView mCustomerName, mCustomerAddress, mCustomerContact, mCustomerBalance;
 
@@ -86,6 +91,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
             mCustomerName = (TextView) itemView.findViewById(R.id.customerName);
         }
     }
+
 
     public void setFilter(ArrayList<CustomerInformation> newList){
         customerInformationsData = new ArrayList<>();

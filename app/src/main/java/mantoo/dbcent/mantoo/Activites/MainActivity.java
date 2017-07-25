@@ -79,14 +79,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
        // createSchema();
 
 
-
     }
 
     private void byDefaultLoading() {
 
         Fragment mfragment = new Customer();
         FragmentTransaction mfragmentTransaction = getSupportFragmentManager().beginTransaction();
-        mfragmentTransaction.replace(R.id.content_main, mfragment);
+
+        mfragmentTransaction.add(R.id.content_main, mfragment);
+
         mfragmentTransaction.commit();
 
         mNavigationView.setCheckedItem(R.id.navigation_Customer);
@@ -227,19 +228,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        /*if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
             closeDrawer();
-        else
-            super.onBackPressed();*/
-
-        FragmentManager fm = getFragmentManager();
-        if (fm.getBackStackEntryCount() > 0) {
-            Log.i("MainActivity", "popping backstack");
-            fm.popBackStack();
+        else if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
         } else {
-            Log.i("MainActivity", "nothing on backstack, calling super");
             super.onBackPressed();
         }
+
+
+
 
     }
 

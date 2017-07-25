@@ -1,15 +1,10 @@
 <resources>
     <string name="app_name">Mantoo</string>
     <string name="action_settings">Settings</string>
-
     <string name="drawer_open">Open Navigation Drawer</string>
     <string name="drawer_close">Close Navigation Drawer</string>
     <string name="search_hint">Search</string>
 
-    <string-array name="App_Drawer_Items">
-        <item>Customers</item>
-        <item>Product</item>
-        <item>Sells</item>
-        <item>Payments</item>
-    </string-array>
+    <string name="deleted">Deleted</string>
+    <string name="undo">UNDO</string>
 </resources>

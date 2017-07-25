@@ -10,12 +10,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+
 
 import java.util.ArrayList;
 
@@ -42,8 +45,7 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
 
     CustomerAdapter madapter;
 
-
-
+    private static final int TIME_TO_AUTOMATICALLY_DISMISS_ITEM = 3000;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +68,25 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT ) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                Toast.makeText(getActivity(), "on Move", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                Toast.makeText(getActivity(), "on Swiped ", Toast.LENGTH_SHORT).show();
+                //Remove swiped item from list and notify the RecyclerView
+            }
+        };
+       // Then set callback for recyclerView with below statements:
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
         return rootView;
     }
 
@@ -74,8 +95,8 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         getActivity().setTitle("Customer");
+
 
         madapter=new CustomerAdapter(getActivity(), customerDataObj.getPartyList());
 
@@ -99,11 +120,18 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
                 sendinfo.putString("customerAddress",customerInformation.getCustomerAddress());
                 sendinfo.putString("customerBalance",customerInformation.getCustomerBalance());
 
+
+
                 Fragment mfragment = new UpdateCustomer();
                 mfragment.setArguments(sendinfo);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_main, mfragment).commit();
+                FragmentTransaction mfragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+                mfragmentTransaction.add(R.id.content_main, mfragment);
+
+                mfragmentTransaction.addToBackStack(null);
 
 
+                mfragmentTransaction.commit();
 
 
             }
@@ -113,6 +141,8 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
 
             }
         }));
+
+
 
 
     }
