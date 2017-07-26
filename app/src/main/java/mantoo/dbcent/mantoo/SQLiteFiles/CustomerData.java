@@ -12,6 +12,7 @@ import java.util.UUID;
 import mantoo.dbcent.mantoo.Extra.Message;
 import mantoo.dbcent.mantoo.Information.CustomerInformation;
 import mantoo.dbcent.mantoo.Interface.Customer;
+import mantoo.dbcent.mantoo.R;
 
 /**
  * Created by dbcent91 on 21/7/17.
@@ -65,6 +66,34 @@ public class CustomerData implements Customer {
 
     }
 
+    @Override
+    public void addCustomer(ContentValues contentValues) {
+        sqLiteDatabaseObj.beginTransaction();
+
+        try {
+
+                UUID partyId = UUID.randomUUID();
+                UUID mantooId = UUID.randomUUID();
+                long millisecond = System.currentTimeMillis();
+
+
+                contentValues.put("id", partyId.toString());
+                contentValues.put("mantooId", mantooId.toString());
+                contentValues.put("createdAt", millisecond);
+                contentValues.put("updatedAt", millisecond);
+
+                sqLiteDatabaseObj.insert("parties", null, contentValues);
+
+            sqLiteDatabaseObj.setTransactionSuccessful();
+            Message.message(context, "Successfull");
+        } catch (Exception e) {
+            Message.message(context, "Un-Successfull");
+        } finally {
+            sqLiteDatabaseObj.endTransaction();
+        }
+
+    }
+
     public ArrayList<CustomerInformation> getPartyList() {
         ArrayList<CustomerInformation> customerInformation = new ArrayList<>();
 
@@ -80,7 +109,7 @@ public class CustomerData implements Customer {
             obj.setCustomerBalance(cursor.getDouble(4));
             obj.setCustomerContact(cursor.getString(5));
 
-            Log.d("Customer",cursor.getString(0));
+            //Log.d("Customer",cursor.getString(0));
             customerInformation.add(obj);
         }
         return customerInformation;
@@ -91,7 +120,6 @@ public class CustomerData implements Customer {
         sqLiteDatabaseObj.beginTransaction();
         try
         {
-
             sqLiteDatabaseObj.update("parties",contentValues, "id='" + partyId+"'", null);
             sqLiteDatabaseObj.setTransactionSuccessful();
             Message.message(context, "Update Successfull");

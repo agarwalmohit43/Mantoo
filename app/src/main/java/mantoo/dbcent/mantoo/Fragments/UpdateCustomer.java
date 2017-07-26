@@ -73,12 +73,7 @@ public class UpdateCustomer extends Fragment implements View.OnClickListener {
 
 
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Fragment mfragment = new Customer();
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_main, mfragment).commit();
-    }
+
 
 
 }

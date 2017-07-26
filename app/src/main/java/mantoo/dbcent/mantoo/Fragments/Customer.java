@@ -4,7 +4,10 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,7 +36,7 @@ import mantoo.dbcent.mantoo.SQLiteFiles.CustomerData;
  * Created by dbcent91 on 21/7/17.
  */
 
-public class Customer extends Fragment implements SearchView.OnQueryTextListener{
+public class Customer extends Fragment implements SearchView.OnQueryTextListener,View.OnClickListener{
 
 
 
@@ -45,6 +48,11 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
 
     CustomerAdapter madapter;
 
+    FloatingActionButton addCustoemr;
+
+    Fragment mfragment;
+    FragmentTransaction mfragmentTransaction;
+
     private static final int TIME_TO_AUTOMATICALLY_DISMISS_ITEM = 3000;
 
     @Override
@@ -54,17 +62,19 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
         setHasOptionsMenu(true);
 
     }
-
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView= inflater.inflate(R.layout.fragment_customer, container, false);
 
+        mfragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+
         customerDataObj=new CustomerData(getActivity());
 
         recyclerView=(RecyclerView) rootView.findViewById(R.id.customer_recyclerView);
+
+        addCustoemr=(FloatingActionButton) rootView.findViewById(R.id.addCustomer_FloatingBtn);
+        addCustoemr.setOnClickListener(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -82,6 +92,7 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
                 //Remove swiped item from list and notify the RecyclerView
             }
         };
+
        // Then set callback for recyclerView with below statements:
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
@@ -101,6 +112,8 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
         madapter=new CustomerAdapter(getActivity(), customerDataObj.getPartyList());
 
         recyclerView.setAdapter(madapter);
+
+
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new MainActivity.ClickListener() {
 
             @Override
@@ -122,15 +135,11 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
 
 
 
-                Fragment mfragment = new UpdateCustomer();
+                mfragment = new UpdateCustomer();
                 mfragment.setArguments(sendinfo);
-                FragmentTransaction mfragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
 
                 mfragmentTransaction.add(R.id.content_main, mfragment);
-
                 mfragmentTransaction.addToBackStack(null);
-
-
                 mfragmentTransaction.commit();
 
 
@@ -181,5 +190,21 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
 
         madapter.setFilter(customerInformations);
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        if(view.getId()==R.id.addCustomer_FloatingBtn){
+           /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();*/
+
+            mfragment  = new AddCustomer();
+            mfragmentTransaction.replace(R.id.content_main, mfragment);
+            mfragmentTransaction.addToBackStack(null);
+            mfragmentTransaction.commit();
+
+
+        }
     }
 }

@@ -24,7 +24,6 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
 
     LayoutInflater inflater;
 
-
     int previousPostion = 0;
 
     public CustomerAdapter(Context context, ArrayList<CustomerInformation> partyList) {

@@ -1,5 +1,5 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fab_margin">20dp</dimen>
     <dimen name="navDrawerWidth">280dp</dimen>
 
     <dimen name="list_item_padding_sides">16dp</dimen>

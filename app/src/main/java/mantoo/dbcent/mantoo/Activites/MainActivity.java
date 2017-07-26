@@ -54,11 +54,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        init(savedInstanceState);
+
 
         //Database object
         customerDataObj=new CustomerData(this);
 
+        init(savedInstanceState);
 
 
     }
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mNavigationView.setCheckedItem(R.id.navigation_Customer);
 
 
+
     }
 
     private void bindResources() {
@@ -120,17 +122,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
+
         initializeCountDrawer();
+
     }
 
-    private void initializeCountDrawer() {
+    public void initializeCountDrawer() {
 
 
         mCustomer.setGravity(Gravity.CENTER_VERTICAL);
         mCustomer.setTypeface(null, Typeface.BOLD);
         //mCustomer.setBackgroundResource(R.drawable.mohit);
         mCustomer.setTextColor(getResources().getColor(R.color.colorAccent));
-        mCustomer.setText("99+");
+        mCustomer.setText(customerDataObj.getPartyList().size()+"");
 
         mPayment.setGravity(Gravity.CENTER_VERTICAL);
         mPayment.setTypeface(null, Typeface.BOLD);
@@ -148,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mProduct.setTypeface(null, Typeface.BOLD);
         //mProduct.setBackgroundResource(R.drawable.mohit);
         mProduct.setTextColor(getResources().getColor(R.color.colorAccent));
-        mProduct.setText("1500");
+        mProduct.setText("23");
     }
 
     @Override
@@ -209,6 +213,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (fragment != null) {
             FragmentTransaction mfragmentTransaction = getSupportFragmentManager().beginTransaction();
             mfragmentTransaction.replace(R.id.content_main, fragment);
+            mfragmentTransaction.addToBackStack(null);
             mfragmentTransaction.commit();
         }
     }

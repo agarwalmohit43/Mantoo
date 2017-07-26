@@ -14,6 +14,7 @@ public interface Customer {
 
     //Create
     public void addPartiesvalue();
+    public void addCustomer(ContentValues contentValues);
 
 
     //Read
