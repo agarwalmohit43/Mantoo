@@ -35,6 +35,7 @@ import mantoo.dbcent.mantoo.Fragments.Sells;
 import mantoo.dbcent.mantoo.Fragments.UpdateCustomer;
 import mantoo.dbcent.mantoo.R;
 import mantoo.dbcent.mantoo.SQLiteFiles.CustomerData;
+import mantoo.dbcent.mantoo.SQLiteFiles.InventoryData;
 import mantoo.dbcent.mantoo.SQLiteFiles.SchemaDefinition;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     SchemaDefinition schemaDefinitionObj;
     CustomerData customerDataObj;
+    InventoryData inventoryDataObj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Database object
         customerDataObj=new CustomerData(this);
+        inventoryDataObj=new InventoryData(this);
 
         init(savedInstanceState);
 
@@ -152,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mProduct.setTypeface(null, Typeface.BOLD);
         //mProduct.setBackgroundResource(R.drawable.mohit);
         mProduct.setTextColor(getResources().getColor(R.color.colorAccent));
-        mProduct.setText("23");
+        mProduct.setText(inventoryDataObj.getInventoryList().size()+"");
     }
 
     @Override

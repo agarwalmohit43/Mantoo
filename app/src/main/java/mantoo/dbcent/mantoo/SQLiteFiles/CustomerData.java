@@ -101,6 +101,7 @@ public class CustomerData implements Customer {
         Cursor cursor = sqLiteDatabaseObj.query("parties", columns, null, null, null, null, null);
 
         while (cursor.moveToNext()) {
+
             CustomerInformation obj=new CustomerInformation();
             obj.setCustomerId(cursor.getString(0));
             obj.setCustomerMantooId(cursor.getString(1));

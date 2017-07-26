@@ -15,10 +15,14 @@ public class SchemaDefinition extends SQLiteOpenHelper {
     private Context context;
 
     private static final String DATABASE_NAME="mantoo";
-    private static final int DATABASE_VERSION=1;
+    private static final int DATABASE_VERSION=2;
 
-    private static final String CREATE_TABLE="CREATE TABLE parties (id TEXT PRIMARY KEY NOT NULL,mantooId TEXT NOT NULL,name TEXT NOT NULL UNIQUE,address TEXT,phoneNumber TEXT,dueAmount DECIMAL(10,5) NOT NULL DEFAULT 0,createdAt INTEGER,updatedAt INTEGER);";
-    private static final String DROP_TABLE="DROP TABLE  IF EXISTS parties";
+   // private static final String CREATE_TABLE="CREATE TABLE parties (id TEXT PRIMARY KEY NOT NULL,mantooId TEXT NOT NULL,name TEXT NOT NULL UNIQUE,address TEXT,phoneNumber TEXT,dueAmount DECIMAL(10,5) NOT NULL DEFAULT 0,createdAt INTEGER,updatedAt INTEGER);";
+    //private static final String DROP_TABLE="DROP TABLE  IF EXISTS parties";
+
+    private static final String CREATE_TABLE="CREATE TABLE inventory (id TEXT PRIMARY KEY NOT NULL,mantooId TEXT,name TEXT NOT NULL UNIQUE,firmId TEXT, mantooProductid TEXT, tax DECIMAL(10,5) NOT NULL, gstRate DECIMAL(10,5) NOT NULL,rate DECIMAL(10,5) NOT NULL,mrp DECIMAL(10,5) NOT NULL, purcahsePrice DECIMAL(10,5) NOT NULL,createdAt INTEGER,updatedAt INTEGER);";
+    private static final String DROP_TABLE="DROP TABLE  IF EXISTS inventory";
+
 
      public SchemaDefinition(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
