@@ -57,10 +57,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
 
-
         //Database object
-        customerDataObj=new CustomerData(this);
-        inventoryDataObj=new InventoryData(this);
+        customerDataObj = new CustomerData(this);
+        inventoryDataObj = new InventoryData(this);
 
         init(savedInstanceState);
 
@@ -69,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void createSchema() {
 
-        schemaDefinitionObj=new SchemaDefinition(this);
-        SQLiteDatabase sqLiteDatabaseObj=schemaDefinitionObj.getWritableDatabase();
+        schemaDefinitionObj = new SchemaDefinition(this);
+        SQLiteDatabase sqLiteDatabaseObj = schemaDefinitionObj.getWritableDatabase();
 
 
     }
@@ -80,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setUpToolbar();
         setUpNavigationDrawerMenu();
         byDefaultLoading();
-       // createSchema();
+        // createSchema();
 
 
     }
@@ -95,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mfragmentTransaction.commit();
 
         mNavigationView.setCheckedItem(R.id.navigation_Customer);
-
 
 
     }
@@ -137,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mCustomer.setTypeface(null, Typeface.BOLD);
         //mCustomer.setBackgroundResource(R.drawable.mohit);
         mCustomer.setTextColor(getResources().getColor(R.color.colorAccent));
-        mCustomer.setText(customerDataObj.getPartyList().size()+"");
+        mCustomer.setText(customerDataObj.getPartyList().size() + "");
 
         mPayment.setGravity(Gravity.CENTER_VERTICAL);
         mPayment.setTypeface(null, Typeface.BOLD);
@@ -155,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mProduct.setTypeface(null, Typeface.BOLD);
         //mProduct.setBackgroundResource(R.drawable.mohit);
         mProduct.setTextColor(getResources().getColor(R.color.colorAccent));
-        mProduct.setText(inventoryDataObj.getInventoryList().size()+"");
+        mProduct.setText(inventoryDataObj.getInventoryList().size() + "");
     }
 
     @Override
@@ -245,8 +243,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
-
-
     }
 
     @Override
@@ -266,10 +262,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }else if (id == R.id.check_update){
-            ContentValues contentValues=new ContentValues();
-            contentValues.put("name","Mohit");
-            customerDataObj.updateParty(contentValues,"c9bc4c11-9196-496c-bfd6-90bfdd7ff675");
+        } else if (id == R.id.check_update) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("name", "Mohit");
+            customerDataObj.updateParty(contentValues, "c9bc4c11-9196-496c-bfd6-90bfdd7ff675");
         }
 
         return super.onOptionsItemSelected(item);

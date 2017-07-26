@@ -14,6 +14,7 @@ import mantoo.dbcent.mantoo.Information.InventoryInformation;
 public interface Inventory {
     //Create
     public void addInventoryValues();
+
     public void addInventory(ContentValues contentValues);
 
 

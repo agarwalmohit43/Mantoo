@@ -29,15 +29,15 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
     public CustomerAdapter(Context context, ArrayList<CustomerInformation> partyList) {
         this.context = context;
         this.customerInformationsData = partyList;
-        inflater=LayoutInflater.from(context);
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
     public CustomerAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view=inflater.inflate(R.layout.customer_list_row, parent, false);
+        View view = inflater.inflate(R.layout.customer_list_row, parent, false);
 
-        MyViewHolder holder=new MyViewHolder(view);
+        MyViewHolder holder = new MyViewHolder(view);
 
         return holder;
     }
@@ -45,20 +45,20 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder myViewHolder, int position) {
 
-        final int currentPostion=position;
-        final CustomerInformation customerInformationObj=customerInformationsData.get(position);
+        final int currentPostion = position;
+        final CustomerInformation customerInformationObj = customerInformationsData.get(position);
 
 
         myViewHolder.mCustomerName.setText(customerInformationsData.get(position).getCustomerName());
         myViewHolder.mCustomerAddress.setText(customerInformationsData.get(position).getCustomerAddress());
-        myViewHolder.mCustomerBalance.setText(customerInformationsData.get(position).getCustomerBalance());
+        myViewHolder.mCustomerBalance.setText(customerInformationsData.get(position).getCustomerBalance() + "");
         myViewHolder.mCustomerContact.setText(customerInformationsData.get(position).getCustomerContact());
 
-        if(position > previousPostion){// we are scrolling down
+        if (position > previousPostion) {// we are scrolling down
 
             AnimationUtil.animate(myViewHolder, true);
 
-        }else{// we are scrolling up
+        } else {// we are scrolling up
 
             AnimationUtil.animate(myViewHolder, false);
         }
@@ -77,7 +77,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
         notifyItemRemoved(position);
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
         TextView mCustomerName, mCustomerAddress, mCustomerContact, mCustomerBalance;
 
 
@@ -92,7 +92,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
     }
 
 
-    public void setFilter(ArrayList<CustomerInformation> newList){
+    public void setFilter(ArrayList<CustomerInformation> newList) {
         customerInformationsData = new ArrayList<>();
         customerInformationsData.addAll(newList);
         notifyDataSetChanged();

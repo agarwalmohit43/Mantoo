@@ -7,13 +7,12 @@ package mantoo.dbcent.mantoo.Information;
 public class CustomerInformation {
 
 
-
     private String customerId;
     private String customerMantooId;
-   private String customerName;
-   private String customerAddress;
-   private String customerContact;
-   private double customerBalance;
+    private String customerName;
+    private String customerAddress;
+    private String customerContact;
+    private double customerBalance;
 
     public String getCustomerId() {
         return customerId;
@@ -56,10 +55,8 @@ public class CustomerInformation {
         this.customerContact = customerContact;
     }
 
-    public String getCustomerBalance() {
-        String amnt="";
-        amnt+=customerBalance;
-        return amnt;
+    public Double getCustomerBalance() {
+        return customerBalance;
     }
 
     public void setCustomerBalance(double customerBalance) {

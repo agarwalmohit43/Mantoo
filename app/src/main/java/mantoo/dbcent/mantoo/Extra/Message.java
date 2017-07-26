@@ -10,11 +10,11 @@ import android.widget.Toast;
  */
 
 public class Message {
-    public static void message(Context c, String m){
-        Toast.makeText(c,m,Toast.LENGTH_SHORT).show();
+    public static void message(Context c, String m) {
+        Toast.makeText(c, m, Toast.LENGTH_SHORT).show();
     }
 
-    public static void snackBar(View view, String m){
+    public static void snackBar(View view, String m) {
         Snackbar.make(view, m, Snackbar.LENGTH_SHORT)
                 .setAction("Action", null).show();
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="190dp"
     android:background="@drawable/header_background">
 
@@ -21,7 +21,7 @@
             android:gravity="bottom"
             android:text="Mantoo"
             android:textColor="#FFFFFF"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/navigation_header_tvemail"
@@ -32,6 +32,6 @@
             android:gravity="bottom"
             android:text="Mantoo@dbcent.com"
             android:textColor="#FFFFFF"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
     </LinearLayout>
 </RelativeLayout>

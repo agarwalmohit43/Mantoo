@@ -22,7 +22,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 
-
 import java.util.ArrayList;
 
 import mantoo.dbcent.mantoo.Activites.MainActivity;
@@ -36,8 +35,7 @@ import mantoo.dbcent.mantoo.SQLiteFiles.CustomerData;
  * Created by dbcent91 on 21/7/17.
  */
 
-public class Customer extends Fragment implements SearchView.OnQueryTextListener,View.OnClickListener{
-
+public class Customer extends Fragment implements SearchView.OnQueryTextListener, View.OnClickListener {
 
 
     CustomerData customerDataObj;
@@ -62,23 +60,24 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
         setHasOptionsMenu(true);
 
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView= inflater.inflate(R.layout.fragment_customer, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_customer, container, false);
 
         mfragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
 
-        customerDataObj=new CustomerData(getActivity());
+        customerDataObj = new CustomerData(getActivity());
 
-        recyclerView=(RecyclerView) rootView.findViewById(R.id.customer_recyclerView);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.customer_recyclerView);
 
-        addCustoemr=(FloatingActionButton) rootView.findViewById(R.id.addCustomer_FloatingBtn);
+        addCustoemr = (FloatingActionButton) rootView.findViewById(R.id.addCustomer_FloatingBtn);
         addCustoemr.setOnClickListener(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT ) {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -93,7 +92,7 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
             }
         };
 
-       // Then set callback for recyclerView with below statements:
+        // Then set callback for recyclerView with below statements:
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
@@ -102,14 +101,13 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
     }
 
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Customer");
 
 
-        madapter=new CustomerAdapter(getActivity(), customerDataObj.getPartyList());
+        madapter = new CustomerAdapter(getActivity(), customerDataObj.getPartyList());
 
         recyclerView.setAdapter(madapter);
 
@@ -125,14 +123,12 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
 //                Toast.makeText(getActivity(), customerInformation.getCustomerName() + " is selected!", Toast.LENGTH_SHORT).show();
 
 
-
                 Bundle sendinfo = new Bundle();
-                sendinfo.putString("customerId",customerInformation.getCustomerId());
-                sendinfo.putString("customerName",customerInformation.getCustomerName());
-                sendinfo.putString("customerContact",customerInformation.getCustomerContact());
-                sendinfo.putString("customerAddress",customerInformation.getCustomerAddress());
-                sendinfo.putString("customerBalance",customerInformation.getCustomerBalance());
-
+                sendinfo.putString("customerId", customerInformation.getCustomerId());
+                sendinfo.putString("customerName", customerInformation.getCustomerName());
+                sendinfo.putString("customerContact", customerInformation.getCustomerContact());
+                sendinfo.putString("customerAddress", customerInformation.getCustomerAddress());
+                sendinfo.putString("customerBalance", customerInformation.getCustomerBalance() + "");
 
 
                 mfragment = new UpdateCustomer();
@@ -152,13 +148,11 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
         }));
 
 
-
-
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate(R.menu.search_menu,menu);
+        getActivity().getMenuInflater().inflate(R.menu.search_menu, menu);
 
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
 
@@ -178,12 +172,12 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
     public boolean onQueryTextChange(String newText) {
 
         newText = newText.toLowerCase();
-        ArrayList<CustomerInformation> customerInformations=new ArrayList<CustomerInformation>();
+        ArrayList<CustomerInformation> customerInformations = new ArrayList<CustomerInformation>();
 
-        for(CustomerInformation customerInformation: customerDataObj.getPartyList()){
+        for (CustomerInformation customerInformation : customerDataObj.getPartyList()) {
 
             String customerName = customerInformation.getCustomerName().toLowerCase();
-            if(customerName.contains(newText)){
+            if (customerName.contains(newText)) {
                 customerInformations.add(customerInformation);
             }
         }
@@ -195,11 +189,11 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
     @Override
     public void onClick(View view) {
 
-        if(view.getId()==R.id.addCustomer_FloatingBtn){
+        if (view.getId() == R.id.addCustomer_FloatingBtn) {
            /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();*/
 
-            mfragment  = new AddCustomer();
+            mfragment = new AddCustomer();
             mfragmentTransaction.replace(R.id.content_main, mfragment);
             mfragmentTransaction.addToBackStack(null);
             mfragmentTransaction.commit();

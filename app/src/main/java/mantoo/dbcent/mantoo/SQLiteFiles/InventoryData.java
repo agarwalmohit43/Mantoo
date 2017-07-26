@@ -46,17 +46,16 @@ public class InventoryData implements Inventory {
                 long millisecond = System.currentTimeMillis();
 
 
-
                 contentValues.put("id", inventoryId.toString());
                 contentValues.put("mantooId", "NULL");
                 contentValues.put("name", name + i);
-                contentValues.put("firmId","NULL");
-                contentValues.put("mantooProductid","NULL");
-                contentValues.put("tax",14.5);
-                contentValues.put("gstRate",28.5);
-                contentValues.put("rate",200);
-                contentValues.put("mrp",250);
-                contentValues.put("purcahsePrice",150);
+                contentValues.put("firmId", "NULL");
+                contentValues.put("mantooProductid", "NULL");
+                contentValues.put("tax", 14.5);
+                contentValues.put("gstRate", 28.5);
+                contentValues.put("rate", 200);
+                contentValues.put("mrp", 250);
+                contentValues.put("purcahsePrice", 150);
                 contentValues.put("createdAt", millisecond);
                 contentValues.put("updatedAt", millisecond);
 

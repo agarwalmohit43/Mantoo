@@ -29,9 +29,9 @@ public class AddCustomer extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView= inflater.inflate(R.layout.add_customer, container, false);
+        View rootView = inflater.inflate(R.layout.add_customer, container, false);
 
-        customerDataObj=new CustomerData(getActivity());
+        customerDataObj = new CustomerData(getActivity());
 
         addCustomer = (Button) rootView.findViewById(R.id.customerUpdate_button_add);
         addCustomer.setOnClickListener(this);
@@ -49,11 +49,11 @@ public class AddCustomer extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
 
-        ContentValues contentValues=new ContentValues();
+        ContentValues contentValues = new ContentValues();
 
-        contentValues.put("name",customerName.getText().toString());
-        contentValues.put("address",customerAddress.getText().toString());
-        contentValues.put("phoneNumber",customerContact.getText().toString());
+        contentValues.put("name", customerName.getText().toString());
+        contentValues.put("address", customerAddress.getText().toString());
+        contentValues.put("phoneNumber", customerContact.getText().toString());
         contentValues.put("dueAmount", Double.parseDouble(customerBalance.getText().toString()));
 
         customerDataObj.addCustomer(contentValues);
