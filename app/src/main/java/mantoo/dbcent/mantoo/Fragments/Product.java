@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -66,7 +67,9 @@ public class Product extends Fragment implements SearchView.OnQueryTextListener,
         inventoryDataObj = new InventoryData(getActivity());
 
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+       // recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
 
 
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {

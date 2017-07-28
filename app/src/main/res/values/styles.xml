@@ -18,5 +18,11 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="Autocomplete" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:background">#4CAF50</item>
+        <item name="colorControlNormal">#FFC107</item>
+        <item name="colorControlActivated">#00BCD4</item>
+    </style>
+
 
 </resources>

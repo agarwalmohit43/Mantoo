@@ -26,9 +26,7 @@
         </RelativeLayout>
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
 
             <TextView
                 android:id="@+id/inventory_Tax_Display"
@@ -41,14 +39,8 @@
                 android:id="@+id/inventory_GST_Display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/inventory_Tax_Display"
-                android:layout_alignBottom="@+id/inventory_Tax_Display"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="69dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_margin="15dp"
                 android:text="GST Rate" />
-        </RelativeLayout>
 
         <TextView
             android:id="@+id/inventory_Rate_Display"

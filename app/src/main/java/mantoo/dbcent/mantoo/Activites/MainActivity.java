@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setUpToolbar();
         setUpNavigationDrawerMenu();
         byDefaultLoading();
-        // createSchema();
+       // createSchema();
 
 
     }

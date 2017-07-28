@@ -72,6 +72,10 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.customer_recyclerView);
 
+        madapter = new CustomerAdapter(getActivity(), customerDataObj.getPartyList());
+
+        recyclerView.setAdapter(madapter);
+
         addCustoemr = (FloatingActionButton) rootView.findViewById(R.id.addCustomer_FloatingBtn);
         addCustoemr.setOnClickListener(this);
 
@@ -107,9 +111,7 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
         getActivity().setTitle("Customer");
 
 
-        madapter = new CustomerAdapter(getActivity(), customerDataObj.getPartyList());
 
-        recyclerView.setAdapter(madapter);
 
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new MainActivity.ClickListener() {
@@ -120,7 +122,7 @@ public class Customer extends Fragment implements SearchView.OnQueryTextListener
                 CustomerInformation customerInformation = customerDataObj.getPartyList().get(position);
 
 
-//                Toast.makeText(getActivity(), customerInformation.getCustomerName() + " is selected!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), customerInformation.getCustomerName() + " is selected!", Toast.LENGTH_SHORT).show();
 
 
                 Bundle sendinfo = new Bundle();
