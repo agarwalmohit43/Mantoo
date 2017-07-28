@@ -68,10 +68,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         firmDataObj = new FirmData(this);
 
         init(savedInstanceState);
-
-
-        firmDataObj.addFirm();
-
     }
 
     private void createSchema() {
