@@ -5,4 +5,16 @@ package mantoo.dbcent.mantoo.Interface;
  */
 
 public interface Firm {
+
+    //Create
+    public void addFirm();
+
+    //Read
+
+
+    //Update
+
+
+
+    //Delete
 }
