@@ -33,11 +33,13 @@ import mantoo.dbcent.mantoo.Fragments.Payments;
 import mantoo.dbcent.mantoo.Fragments.Product;
 import mantoo.dbcent.mantoo.Fragments.Sells;
 import mantoo.dbcent.mantoo.Fragments.UpdateCustomer;
+import mantoo.dbcent.mantoo.Information.TransactionsInformation;
 import mantoo.dbcent.mantoo.R;
 import mantoo.dbcent.mantoo.SQLiteFiles.CustomerData;
 import mantoo.dbcent.mantoo.SQLiteFiles.FirmData;
 import mantoo.dbcent.mantoo.SQLiteFiles.InventoryData;
 import mantoo.dbcent.mantoo.SQLiteFiles.SchemaDefinition;
+import mantoo.dbcent.mantoo.SQLiteFiles.TransactionsData;
 import mantoo.dbcent.mantoo.SQLiteFiles.UserData;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     InventoryData inventoryDataObj;
     UserData userDataObj;
     FirmData firmDataObj;
+    TransactionsData transactionsDataObj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +69,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         inventoryDataObj = new InventoryData(this);
         userDataObj = new UserData(this);
         firmDataObj = new FirmData(this);
+        transactionsDataObj =new TransactionsData(this);
 
         init(savedInstanceState);
+
+        TransactionsInformation obj= new TransactionsInformation();
+       obj=transactionsDataObj.getTransactionDataWithStatus();
     }
 
     private void createSchema() {
@@ -83,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setUpToolbar();
         setUpNavigationDrawerMenu();
         byDefaultLoading();
-       // createSchema();
+        //createSchema();
 
 
     }

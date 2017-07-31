@@ -15,6 +15,16 @@ public class InventoryInformation {
     private Double mrp;
     private Double purcahsePrice;
 
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
+    private Double discount;
+
     public String getId() {
         return id;
     }

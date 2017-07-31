@@ -31,6 +31,9 @@ public class CustomerData implements Customer {
         sqLiteDatabaseObj = schemaDefinitionObj.getWritableDatabase();
     }
 
+
+    //Customer Dummy id -> 62f1495f-26ec-4c4b-9d6a-74896de20729
+
     public void addPartiesvalue() {
         sqLiteDatabaseObj.beginTransaction();
 
@@ -64,6 +67,40 @@ public class CustomerData implements Customer {
             sqLiteDatabaseObj.endTransaction();
         }
 
+    }
+
+    @Override
+    public void addPartiesDummyvalue() {
+
+        sqLiteDatabaseObj.beginTransaction();
+
+        try {
+            ContentValues contentValues = new ContentValues();
+
+            UUID partyId = UUID.randomUUID();
+            UUID mantooId = UUID.randomUUID();
+            long millisecond = System.currentTimeMillis();
+
+
+            contentValues.put("id", partyId.toString());
+            contentValues.put("mantooId", mantooId.toString());
+            contentValues.put("name", "self");
+            contentValues.put("address", "Pune");
+            contentValues.put("phoneNumber", "8981871984");
+            contentValues.put("dueAmount", 50000);
+            contentValues.put("createdAt", millisecond);
+            contentValues.put("updatedAt", millisecond);
+
+            Log.d("Customer", partyId.toString());
+            sqLiteDatabaseObj.insert("parties", null, contentValues);
+
+            sqLiteDatabaseObj.setTransactionSuccessful();
+            Message.message(context, "Successfull");
+        } catch (Exception e) {
+            Message.message(context, "Un-Successfull");
+        } finally {
+            sqLiteDatabaseObj.endTransaction();
+        }
     }
 
     @Override

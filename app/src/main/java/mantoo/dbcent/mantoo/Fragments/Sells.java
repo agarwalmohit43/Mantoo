@@ -115,6 +115,7 @@ public class Sells extends Fragment implements TextWatcher {
            // Message.message(getActivity(), customerInformationMap.get(customerTextView.getText().toString()).getCustomerName());
 
             rate.setText(inventoryInformationMap.get(inventoryTextView.getText().toString()).getRate().toString());
+            discount.setText(inventoryInformationMap.get(inventoryTextView.getText().toString()).getDiscount().toString());
             tax.setText(inventoryInformationMap.get(inventoryTextView.getText().toString()).getGstRate().toString());
 
         }else{

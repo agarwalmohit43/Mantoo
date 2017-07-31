@@ -103,6 +103,7 @@ public class InventoryData implements Inventory {
 
 
 
+
     }
 
     @Override
@@ -110,7 +111,7 @@ public class InventoryData implements Inventory {
 
         ArrayList<InventoryInformation> inventoryInformationsList = new ArrayList<>();
 
-        String[] columns={"id","name","tax","gstRate","rate","mrp","purcahsePrice"};
+        String[] columns={"id","name","tax","gstRate","rate","mrp","purcahsePrice","discount"};
         Cursor cursor = sqLiteDatabaseObj.query("inventory", columns, null, null, null, null, null);
 
         while(cursor.moveToNext()){
@@ -123,6 +124,7 @@ public class InventoryData implements Inventory {
             obj.setRate(cursor.getDouble(4));
             obj.setMrp(cursor.getDouble(5));
             obj.setPurcahsePrice(cursor.getDouble(6));
+            obj.setDiscount(cursor.getDouble(7));
 
             Log.d("Inventory",cursor.getString(0));
             inventoryInformationsList.add(obj);
