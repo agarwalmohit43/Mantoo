@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
 
-        //Database object
+        //Database objects
         customerDataObj = new CustomerData(this);
         inventoryDataObj = new InventoryData(this);
         userDataObj = new UserData(this);
