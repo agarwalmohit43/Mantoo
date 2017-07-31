@@ -72,6 +72,32 @@ public class InventoryData implements Inventory {
 
     }
 
+   /* public void addDiscount() {
+
+        sqLiteDatabaseObj.beginTransaction();
+
+        try {
+
+                ContentValues contentValues = new ContentValues();
+
+                UUID inventoryId = UUID.randomUUID();
+                long millisecond = System.currentTimeMillis();
+
+
+                contentValues.put("updatedAt", millisecond);
+
+                sqLiteDatabaseObj.insert("inventory", null, contentValues);
+            }
+            sqLiteDatabaseObj.setTransactionSuccessful();
+            Message.message(context, "Successfull");
+        } catch (Exception e) {
+            Message.message(context, "Un-Successfull");
+        } finally {
+            sqLiteDatabaseObj.endTransaction();
+        }
+
+    }*/
+
     @Override
     public void addInventory(ContentValues contentValues) {
 

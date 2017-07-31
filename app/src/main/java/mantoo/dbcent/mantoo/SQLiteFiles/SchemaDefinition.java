@@ -15,7 +15,7 @@ public class SchemaDefinition extends SQLiteOpenHelper {
     private Context context;
 
     private static final String DATABASE_NAME="mantoo";
-    private static final int DATABASE_VERSION=7;
+    private static final int DATABASE_VERSION=8;
 
    // private static final String CREATE_TABLE="CREATE TABLE parties (id TEXT PRIMARY KEY NOT NULL,mantooId TEXT NOT NULL,name TEXT NOT NULL UNIQUE,address TEXT,phoneNumber TEXT,dueAmount DECIMAL(10,5) NOT NULL DEFAULT 0,createdAt INTEGER,updatedAt INTEGER);";
     //private static final String DROP_TABLE="DROP TABLE  IF EXISTS parties";
@@ -25,6 +25,8 @@ public class SchemaDefinition extends SQLiteOpenHelper {
 //    private static final String CREATE_TABLE_USER = "CREATE TABLE user (id TEXT PRIMARY KEY NOT NULL, name TEXT NOT NULL, email TEXT NOT NULL,firmId TEXT, createdAt INTEGER,updatedAt INTEGER)";
     private static final String CREATE_TABLE_FIRM = "CREATE TABLE firm (id TEXT PRIMARY KEY NOT NULL, name TEXT NOT NULL, mantooId TEXT, userId TEXT NOT NULL, createdAt INTEGER,updatedAt INTEGER, FOREIGN KEY (userId) REFERENCES user(id))";
 
+
+    private static final String ALTER_TABLE_INVENTORY="ALTER TABLE inventory ADD COLUMN discount DECIMAL(10,5) DEFAULT 0";
 
 //    private static final String DROP_TABLE_PARTIES = "DROP TABLE  IF EXISTS parties";
 //    private static final String DROP_TABLE_INVENTORY = "DROP TABLE  IF EXISTS inventory";
@@ -46,7 +48,7 @@ public class SchemaDefinition extends SQLiteOpenHelper {
 
         try{
 
-              sqLiteDatabase.execSQL(CREATE_TABLE_FIRM);
+              //sqLiteDatabase.execSQL(CREATE_TABLE_FIRM);
               Message.message(context,"Table Created FIRM");
 
         }catch (Exception e){
@@ -59,10 +61,11 @@ public class SchemaDefinition extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         Message.message(context,"onUpgrade Called");
         try{
-             sqLiteDatabase.execSQL(DROP_TABLE_FIRM);
+             sqLiteDatabase.execSQL(ALTER_TABLE_INVENTORY);
 
-             Message.message(context," Table Droped \n onCreate Will be called Now");
-             onCreate(sqLiteDatabase);
+            Message.message(context,"table updated with discount column");
+            // Message.message(context," Table Droped \n onCreate Will be called Now");
+             //onCreate(sqLiteDatabase);
 
         }catch (Exception e){
             Message.message(context,""+e);
